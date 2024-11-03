@@ -1,0 +1,446 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>EduSpark - My Learning Dashboard</title>-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">-->
+<!--    <style>-->
+<!--        :root {-->
+<!--            &#45;&#45;primary-color: #00cccc;-->
+<!--            &#45;&#45;secondary-color: #252525;-->
+<!--            &#45;&#45;background-dark: #1e1e1e;-->
+<!--            &#45;&#45;card-background: #2a2a2a;-->
+<!--            &#45;&#45;text-light: #ffffff;-->
+<!--            &#45;&#45;text-gray: #999999;-->
+<!--        }-->
+
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--            font-family: Arial, sans-serif;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            background-color: var(&#45;&#45;background-dark);-->
+<!--            color: var(&#45;&#45;text-light);-->
+<!--        }-->
+
+<!--        /* Header */-->
+<!--        header {-->
+<!--            background: var(&#45;&#45;secondary-color);-->
+<!--            padding: 1rem 2rem;-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);-->
+<!--        }-->
+
+<!--        .logo span {-->
+<!--            color: var(&#45;&#45;primary-color);-->
+<!--            font-size: 24px;-->
+<!--            font-weight: bold;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+<!--        nav a {-->
+<!--            color: var(&#45;&#45;text-light);-->
+<!--            text-decoration: none;-->
+<!--            margin: 0 15px;-->
+<!--            padding: 5px 10px;-->
+<!--            border-radius: 5px;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        nav a:hover {-->
+<!--            color: var(&#45;&#45;primary-color);-->
+<!--        }-->
+
+<!--        /* Main Content */-->
+<!--        .container {-->
+<!--            max-width: 1200px;-->
+<!--            margin: 2rem auto;-->
+<!--            padding: 0 2rem;-->
+<!--        }-->
+
+<!--        .welcome-section {-->
+<!--            background: var(&#45;&#45;card-background);-->
+<!--            padding: 2rem;-->
+<!--            border-radius: 10px;-->
+<!--            margin-bottom: 2rem;-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--        }-->
+
+<!--        .welcome-text h1 {-->
+<!--            color: var(&#45;&#45;primary-color);-->
+<!--            margin-bottom: 0.5rem;-->
+<!--        }-->
+
+<!--        .welcome-text p {-->
+<!--            color: var(&#45;&#45;text-gray);-->
+<!--        }-->
+
+<!--        /* Course Grid */-->
+<!--        .course-grid {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));-->
+<!--            gap: 2rem;-->
+<!--            padding: 1rem 0;-->
+<!--        }-->
+
+<!--        .course-card {-->
+<!--            background: var(&#45;&#45;card-background);-->
+<!--            border-radius: 10px;-->
+<!--            overflow: hidden;-->
+<!--            transition: transform 0.3s ease;-->
+<!--        }-->
+
+<!--        .course-card:hover {-->
+<!--            transform: translateY(-5px);-->
+<!--        }-->
+
+<!--        .course-image {-->
+<!--            width: 100%;-->
+<!--            height: 180px;-->
+<!--            object-fit: cover;-->
+<!--        }-->
+
+<!--        .course-content {-->
+<!--            padding: 1.5rem;-->
+<!--        }-->
+
+<!--        .course-title {-->
+<!--            font-size: 1.25rem;-->
+<!--            color: var(&#45;&#45;text-light);-->
+<!--            margin-bottom: 1rem;-->
+<!--        }-->
+
+<!--        .course-description {-->
+<!--            color: var(&#45;&#45;text-gray);-->
+<!--            font-size: 0.9rem;-->
+<!--            line-height: 1.5;-->
+<!--            margin-bottom: 1rem;-->
+<!--        }-->
+
+<!--        .course-button {-->
+<!--            display: inline-block;-->
+<!--            background-color: var(&#45;&#45;primary-color);-->
+<!--            color: var(&#45;&#45;text-light);-->
+<!--            padding: 0.75rem 1.5rem;-->
+<!--            border-radius: 5px;-->
+<!--            text-decoration: none;-->
+<!--            font-weight: 500;-->
+<!--            transition: background-color 0.3s;-->
+<!--        }-->
+
+<!--        .course-button:hover {-->
+<!--            background-color: #009999;-->
+<!--        }-->
+
+<!--        @media (max-width: 768px) {-->
+<!--            .container {-->
+<!--                padding: 1rem;-->
+<!--            }-->
+
+<!--            .welcome-section {-->
+<!--                flex-direction: column;-->
+<!--                text-align: center;-->
+<!--            }-->
+
+<!--            .course-grid {-->
+<!--                grid-template-columns: 1fr;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<header>-->
+<!--    <a href="/dashboard" class="logo">-->
+<!--        <span>EduSpark</span>-->
+<!--    </a>-->
+<!--    <nav>-->
+<!--        <a href="/dashboard">Home</a>-->
+<!--        <a href="/courses/personal">My Courses</a>-->
+<!--        <a href="/profile" th:text="${userLogin}">Profile</a>-->
+<!--        <a href="/logout">Logout</a>-->
+<!--    </nav>-->
+<!--</header>-->
+
+<!--<div class="container">-->
+<!--    <div class="welcome-section">-->
+<!--        <div class="welcome-text">-->
+<!--            <h1>Welcome back, <span th:text="${userLogin}">User</span>!</h1>-->
+<!--            <p>Continue your learning journey</p>-->
+<!--        </div>-->
+<!--        <div class="user-role" th:text="${userRole}">Role</div>-->
+<!--    </div>-->
+
+<!--    <div class="course-grid">-->
+<!--        &lt;!&ndash; Debug information &ndash;&gt;-->
+<!--        <div th:if="${courses != null}" th:text="${'Total courses: ' + courses.size()}"></div>-->
+
+<!--        &lt;!&ndash; Add a check for empty courses list &ndash;&gt;-->
+<!--        <div th:if="${courses == null || courses.empty}" class="no-courses">-->
+<!--            <p>No courses available at the moment.</p>-->
+<!--            &lt;!&ndash; Debug information &ndash;&gt;-->
+<!--            <p th:if="${errorMessage}" th:text="${errorMessage}"></p>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Iterate over courses &ndash;&gt;-->
+<!--        <div th:if="${courses != null && !courses.empty}">-->
+<!--            <div th:each="course : ${courses}" class="course-card">-->
+<!--                <img th:src="${course.imageUrl}"-->
+<!--                     th:alt="${course.title} + ' Image'"-->
+<!--                     class="course-image"-->
+<!--                     onerror="this.src='/images/default-course.jpg'">-->
+<!--                <div class="course-content">-->
+<!--                    <h2 class="course-title" th:text="${course.title}">Course Title</h2>-->
+<!--                    <p class="course-description" th:text="${course.description}">Course description...</p>-->
+<!--                    <a th:href="@{'/courses/' + ${course.id}}" class="course-button">Continue Learning</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSpark - My Learning Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00cccc;
+            --secondary-color: #252525;
+            --background-dark: #1e1e1e;
+            --card-background: #2a2a2a;
+            --text-light: #ffffff;
+            --text-gray: #999999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+        }
+
+        /* Header */
+        header {
+            background: var(--secondary-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .welcome-section {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            color: var(--text-gray);
+        }
+
+        /* Course Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+
+        .course-card {
+            background: var(--card-background);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .course-description {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .course-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .course-button:hover {
+            background-color: #009999;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .welcome-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="/dashboard" class="logo">
+        <span>EduSpark</span>
+    </a>
+    <nav>
+        <a href="/dashboard">Home</a>
+        <a href="/courses/personal">My Courses</a>
+        <a href="/profile" th:text="${userLogin}">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="welcome-section">
+        <div class="welcome-text">
+            <h1>Welcome back, <span th:text="${userLogin}">User</span>!</h1>
+            <p>Continue your learning journey</p>
+        </div>
+        <div class="user-role" th:text="${userRole}">Role</div>
+    </div>
+
+    <div class="course-grid">
+        <!-- Check if there are any courses available -->
+        <div th:if="${courses == null || courses.empty}">
+            <p>No courses available at the moment. Here are some recommendations:</p>
+
+            <!-- Default course cards to display if courses are null or empty -->
+            <div class="course-card">
+                <img src="/images/default-course1.jpg" alt="Default Course 1" class="course-image">
+                <div class="course-content">
+                    <h2 class="course-title">Intro to Web Development</h2>
+                    <p class="course-description">Learn the basics of HTML, CSS, and JavaScript.</p>
+                    <a href="/courses/default1" class="course-button">Start Learning</a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <img src="/images/default-course2.jpg" alt="Default Course 2" class="course-image">
+                <div class="course-content">
+                    <h2 class="course-title">Introduction to Python</h2>
+                    <p class="course-description">Get started with Python programming.</p>
+                    <a href="/courses/default2" class="course-button">Start Learning</a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <img src="/images/default-course3.jpg" alt="Default Course 3" class="course-image">
+                <div class="course-content">
+                    <h2 class="course-title">Digital Marketing Basics</h2>
+                    <p class="course-description">Understand the fundamentals of digital marketing.</p>
+                    <a href="/courses/default3" class="course-button">Start Learning</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actual courses section if courses are available -->
+        <div th:if="${courses != null && !courses.empty}">
+            <div th:each="course : ${courses}" class="course-card">
+                <img th:src="${course.imageUrl}"
+                     th:alt="${course.title} + ' Image'"
+                     class="course-image"
+                     onerror="this.src='/images/default-course.jpg'">
+                <div class="course-content">
+                    <h2 class="course-title" th:text="${course.title}">Course Title</h2>
+                    <p class="course-description" th:text="${course.description}">Course description...</p>
+                    <a th:href="@{'/courses/' + ${course.id}}" class="course-button">Continue Learning</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+

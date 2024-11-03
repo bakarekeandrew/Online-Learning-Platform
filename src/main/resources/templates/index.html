@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> EduSpark - Your Learning Journey Starts Here</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        /* Navigation Bar */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: #252525;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #00cccc;
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00cccc;
+        }
+
+        nav a.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .banner {
+            margin-top: 70px;
+            min-height: 90vh;
+            background-color: #1c1c1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            gap: 2rem;
+        }
+
+        .banner-text {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .banner-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .highlight {
+            color: #00cccc;
+        }
+
+        .banner-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #999;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cta-buttons a {
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-buttons a:hover {
+            transform: translateY(-2px);
+        }
+
+        .cta-buttons a:first-child {
+            background-color: #00cccc;
+            color: white;
+        }
+
+        .cta-buttons a:last-child {
+            border: 2px solid #00cccc;
+            color: white;
+        }
+
+        /* Features Section */
+        .featured-section {
+            padding: 4rem 2rem;
+            background-color: #252525;
+        }
+
+        .featured-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #00cccc;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .course-card {
+            background-color: #1c1c1e;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card i {
+            font-size: 2.5rem;
+            color: #00cccc;
+            margin-bottom: 1rem;
+        }
+
+        .course-card p {
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1c1c1e;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        footer i {
+            color: #00cccc;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner-text {
+                padding-right: 0;
+            }
+
+            .banner-text h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<header>
+    <a href="/" class="logo">
+        <span>EduSpark</span>
+    </a>
+    <nav>
+        <a href="#" class="disabled">Home</a>
+        <a href="#" class="disabled">Courses</a>
+        <a href="#" class="disabled">My Learning</a>
+        <a href="#" class="disabled">Resources</a>
+        <a href="/login" style="color: #00cccc;">Login</a>
+        <a href="/register" style="color: #00cccc;">Sign Up</a>
+        <a href="?lang=en">English</a> | <a href="?lang=fr">Français</a>
+
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<div class="banner">
+    <div class="banner-content">
+        <div class="banner-text">
+            <h1>Transform Your Future<br>Through <span class="highlight">Learning</span></h1>
+            <p>Access world-class courses and expert instructors.<br>Learn at your own pace and unlock your potential today.</p>
+            <div class="cta-buttons">
+                <a href="/login">Get Started</a>
+                <a href="/register">Explore Courses</a>
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <img src="/api/placeholder/600/400" alt="Learning illustration" style="width: 100%; height: auto; border-radius: 10px;">
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<section class="featured-section">
+    <h2>Why Choose EduSpark</h2>
+    <div class="course-grid">
+        <div class="course-card">
+            <i class="fas fa-laptop-code"></i>
+            <p>Expert-Led Courses</p>
+        </div>
+        <div class="course-card">
+            <i class="fas fa-clock"></i>
+            <p>Learn at Your Pace</p>
+        </div>
+        <div class="course-card">
+            <i class="fas fa-certificate"></i>
+            <p>Earn Certificates</p>
+        </div>
+        <div class="course-card">
+            <i class="fas fa-users"></i>
+            <p>Community Support</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2024 EduSpark. All Rights Reserved.</p>
+    <p>
+        Follow us on
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-facebook"></i>
+    </p>
+</footer>
+</body>
+</html>
