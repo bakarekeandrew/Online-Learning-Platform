@@ -268,7 +268,7 @@
                 <i class="fas fa-chart-line"></i>
                 <span th:text="#{nav.dashboard}">Dashboard</span>
             </a>
-            <a th:href="@{users}" class="nav-item">
+            <a th:href="@{/admin/users}" class="nav-item">
                 <i class="fas fa-users"></i>
                 <span th:text="#{nav.users}">Users</span>
             </a>
@@ -292,7 +292,6 @@
         <div class="header">
             <h1 th:text="#{dashboard.overview}">Dashboard Overview</h1>
             <div class="header-controls">
-                <!-- Language Switcher -->
                 <div class="language-switcher">
                     <button
                             class="lang-btn"
@@ -305,7 +304,6 @@
                             onclick="changeLanguage('fr')"
                             th:text="#{language.french}">Français</button>
                 </div>
-                <!-- Logout Form -->
                 <form th:action="@{/logout}" method="post">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <button type="submit" class="btn-logout">
@@ -316,47 +314,66 @@
             </div>
         </div>
 
-
         <!-- Statistics Cards -->
         <div class="stats-grid">
             <div class="stat-card">
-                <h3><i class="fas fa-book"></i> <span th:text="#{stats.total.courses}">Total Courses</span></h3>
-                <div class="number" th:text="${totalCourses}">0</div>
-                <p th:text="${'+'+ newCourses + ' this month'}">+0 this month</p>
-            </div>
-            <div class="stat-card">
-                <h3><i class="fas fa-users"></i> Total Users</h3>
-                <div class="number" th:text="${totalUsers}">0</div>
+                <h3>
+                    <i class="fas fa-book"></i>
+                    <span th:text="#{stats.total.courses}">Total Courses</span>
+                </h3>
+                <div class="number" >6</div>
                 <p>
-                    <span th:text="'+'+ ${newCourses}">+0</span>
+                    <span th:text="'+'">+6</span>
                     <span th:text="#{stats.this.month}">this month</span>
                 </p>
-
             </div>
             <div class="stat-card">
-                <h3><i class="fas fa-user-graduate"></i> Active Students</h3>
-                <div class="number" th:text="${activeStudents}">0</div>
-                <p th:text="${'+'+ newActiveStudents + ' this month'}">+0 this month</p>
+                <h3>
+                    <i class="fas fa-users"></i>
+                    <span th:text="#{stats.total.users}">Total Users</span>
+                </h3>
+                <div class="number" >+6</div>
+                <p>
+                    <span>+0</span>
+                    <span th:text="#{stats.this.month}">this month</span>
+                </p>
             </div>
             <div class="stat-card">
-                <h3><i class="fas fa-certificate"></i> Completions</h3>
-                <div class="number" th:text="${completions}">0</div>
-                <p th:text="${'+'+ newCompletions + ' this month'}">+0 this month</p>
+                <h3>
+                    <i class="fas fa-user-graduate"></i>
+                    <span th:text="#{stats.active.students}">Active Students</span>
+                </h3>
+                <div class="number" >5</div>
+                <p>
+                    <span>+2</span>
+                    <span th:text="#{stats.this.month}">this month</span>
+                </p>
+            </div>
+            <div class="stat-card">
+                <h3>
+                    <i class="fas fa-certificate"></i>
+                    <span th:text="#{stats.completions}">Completions</span>
+                </h3>
+                <div class="number">10</div>
+                <p>
+                    <span >+3</span>
+                    <span >this month</span>
+                </p>
             </div>
         </div>
 
         <!-- Charts -->
         <div class="chart-grid">
             <div class="chart-card">
-                <h3>Course Enrollment Trends</h3>
+                <h3 th:text="#{chart.enrollment.trends}">Course Enrollment Trends</h3>
                 <canvas id="enrollmentChart"></canvas>
             </div>
             <div class="chart-card">
-                <h3>User Registration Trends</h3>
+                <h3 th:text="#{chart.registration.trends}">User Registration Trends</h3>
                 <canvas id="registrationChart"></canvas>
             </div>
             <div class="chart-card">
-                <h3>Course Categories Distribution</h3>
+                <h3 th:text="#{chart.categories.distribution}">Course Categories Distribution</h3>
                 <canvas id="categoriesChart"></canvas>
             </div>
         </div>
@@ -364,106 +381,174 @@
 </div>
 
 <script th:inline="javascript">
-    const currentLang = /*[[${#locale.language}]]*/ 'en';
+    const currentLang = 'en';
 
-       // Function to show loading overlay
-       function showLoading() {
-           document.querySelector('.loading-overlay').style.display = 'flex';
-       }
+    // Hardcoded chart labels
+    const enrollmentTrendsLabel = 'Monthly Enrollments';
+    const newUsersLabel = 'New Users';
+    const categoryDistributionLabel = 'Category Distribution';
 
-       // Function to hide loading overlay
-       function hideLoading() {
-           document.querySelector('.loading-overlay').style.display = 'none';
-       }
+    // Hardcoded enrollment data for the last 6 months
+    const enrollmentData = [
+        { month: 'June', count: 245 },
+        { month: 'July', count: 312 },
+        { month: 'August', count: 478 },
+        { month: 'September', count: 523 },
+        { month: 'October', count: 689 },
+        { month: 'November', count: 752 }
+    ];
 
-       // Function to change language
-       function changeLanguage(lang) {
-           if (lang === currentLang) return;
+    // Hardcoded registration data for the last 6 months
+    const registrationData = [
+        { month: 'June', count: 156 },
+        { month: 'July', count: 198 },
+        { month: 'August', count: 267 },
+        { month: 'September', count: 329 },
+        { month: 'October', count: 428 },
+        { month: 'November', count: 512 }
+    ];
 
-           showLoading();
+    // Hardcoded category distribution data
+    const categoryData = [
+        { category: 'Programming', count: 450 },
+        { category: 'Business', count: 320 },
+        { category: 'Design', count: 280 },
+        { category: 'Marketing', count: 195 }
+    ];
 
-           // Store current scroll position
-           const scrollPos = window.scrollY;
-           localStorage.setItem('scrollPos', scrollPos);
+    // Function to show loading overlay
+    function showLoading() {
+        document.querySelector('.loading-overlay').style.display = 'flex';
+    }
 
-           // Redirect to change language
-           window.location.href = `/changeLanguage?lang=${lang}`;
-       }
+    // Function to hide loading overlay
+    function hideLoading() {
+        document.querySelector('.loading-overlay').style.display = 'none';
+    }
 
-       // Restore scroll position after page load
-       window.addEventListener('load', () => {
-           hideLoading();
-           const scrollPos = localStorage.getItem('scrollPos');
-           if (scrollPos) {
-               window.scrollTo(0, parseInt(scrollPos));
-               localStorage.removeItem('scrollPos');
-           }
-       });
+    // Function to change language
+    function changeLanguage(lang) {
+        if (lang === currentLang) return;
+        showLoading();
+        const scrollPos = window.scrollY;
+        localStorage.setItem('scrollPos', scrollPos);
+        window.location.href = `/changeLanguage?lang=${lang}`;
+    }
 
-       // Add loading overlay when leaving page
-       window.addEventListener('beforeunload', showLoading);
+    // Enrollment Trends Chart
+    new Chart(document.getElementById('enrollmentChart'), {
+        type: 'line',
+        data: {
+            labels: enrollmentData.map(item => item.month),
+            datasets: [{
+                label: enrollmentTrendsLabel,
+                data: enrollmentData.map(item => item.count),
+                borderColor: '#00ffff',
+                backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
 
+    // User Registration Chart
+    new Chart(document.getElementById('registrationChart'), {
+        type: 'bar',
+        data: {
+            labels: registrationData.map(item => item.month),
+            datasets: [{
+                label: newUsersLabel,
+                data: registrationData.map(item => item.count),
+                backgroundColor: 'rgba(0, 255, 255, 0.7)',
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
 
-   // Get data from Thymeleaf
-   const enrollmentData = /*[[${enrollmentData}]]*/ [];
-   const registrationData = /*[[${registrationData}]]*/ [];
-   const categoryData = /*[[${categoryData}]]*/ [];
+    // Categories Pie Chart
+    new Chart(document.getElementById('categoriesChart'), {
+        type: 'pie',
+        data: {
+            labels: categoryData.map(item => item.category),
+            datasets: [{
+                data: categoryData.map(item => item.count),
+                backgroundColor: [
+                    'rgba(0, 255, 255, 0.8)',
+                    'rgba(0, 204, 204, 0.8)',
+                    'rgba(42, 42, 42, 0.8)',
+                    'rgba(26, 26, 26, 0.8)'
+                ],
+                borderWidth: 1,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right'
+                }
+            }
+        }
+    });
 
-   // Enrollment Trends Chart
-   new Chart(document.getElementById('enrollmentChart'), {
-       type: 'line',
-       data: {
-           labels: enrollmentData.map(item => item.month),
-           datasets: [{
-               label: 'Course Enrollments',
-               data: enrollmentData.map(item => item.count),
-               borderColor: '#00ffff',
-               tension: 0.1
-           }]
-       },
-       options: {
-           responsive: true,
-           maintainAspectRatio: false
-       }
-   });
+    // Restore scroll position after page load
+    window.addEventListener('load', () => {
+        hideLoading();
+        const scrollPos = localStorage.getItem('scrollPos');
+        if (scrollPos) {
+            window.scrollTo(0, parseInt(scrollPos));
+            localStorage.removeItem('scrollPos');
+        }
+    });
 
-   // User Registration Chart
-   new Chart(document.getElementById('registrationChart'), {
-       type: 'bar',
-       data: {
-           labels: registrationData.map(item => item.month),
-           datasets: [{
-               label: 'New Users',
-               data: registrationData.map(item => item.count),
-               backgroundColor: '#00ffff'
-           }]
-       },
-       options: {
-           responsive: true,
-           maintainAspectRatio: false
-       }
-   });
-
-   // Categories Pie Chart
-   new Chart(document.getElementById('categoriesChart'), {
-       type: 'pie',
-       data: {
-           labels: categoryData.map(item => item.category),
-           datasets: [{
-               data: categoryData.map(item => item.count),
-               backgroundColor: [
-                   '#00ffff',
-                   '#00cccc',
-                   '#2a2a2a',
-                   '#1a1a1a'
-               ]
-           }]
-       },
-       options: {
-           responsive: true,
-           maintainAspectRatio: false
-       }
-   });
+    // Add loading overlay when leaving page
+    window.addEventListener('beforeunload', showLoading);
 </script>
 </body>
 </html>

@@ -1,214 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>EduSpark - My Learning Dashboard</title>-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">-->
-<!--    <style>-->
-<!--        :root {-->
-<!--            &#45;&#45;primary-color: #00cccc;-->
-<!--            &#45;&#45;secondary-color: #252525;-->
-<!--            &#45;&#45;background-dark: #1e1e1e;-->
-<!--            &#45;&#45;card-background: #2a2a2a;-->
-<!--            &#45;&#45;text-light: #ffffff;-->
-<!--            &#45;&#45;text-gray: #999999;-->
-<!--        }-->
-
-<!--        * {-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            box-sizing: border-box;-->
-<!--            font-family: Arial, sans-serif;-->
-<!--        }-->
-
-<!--        body {-->
-<!--            background-color: var(&#45;&#45;background-dark);-->
-<!--            color: var(&#45;&#45;text-light);-->
-<!--        }-->
-
-<!--        /* Header */-->
-<!--        header {-->
-<!--            background: var(&#45;&#45;secondary-color);-->
-<!--            padding: 1rem 2rem;-->
-<!--            display: flex;-->
-<!--            justify-content: space-between;-->
-<!--            align-items: center;-->
-<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);-->
-<!--        }-->
-
-<!--        .logo span {-->
-<!--            color: var(&#45;&#45;primary-color);-->
-<!--            font-size: 24px;-->
-<!--            font-weight: bold;-->
-<!--            text-decoration: none;-->
-<!--        }-->
-
-<!--        nav a {-->
-<!--            color: var(&#45;&#45;text-light);-->
-<!--            text-decoration: none;-->
-<!--            margin: 0 15px;-->
-<!--            padding: 5px 10px;-->
-<!--            border-radius: 5px;-->
-<!--            transition: all 0.3s ease;-->
-<!--        }-->
-
-<!--        nav a:hover {-->
-<!--            color: var(&#45;&#45;primary-color);-->
-<!--        }-->
-
-<!--        /* Main Content */-->
-<!--        .container {-->
-<!--            max-width: 1200px;-->
-<!--            margin: 2rem auto;-->
-<!--            padding: 0 2rem;-->
-<!--        }-->
-
-<!--        .welcome-section {-->
-<!--            background: var(&#45;&#45;card-background);-->
-<!--            padding: 2rem;-->
-<!--            border-radius: 10px;-->
-<!--            margin-bottom: 2rem;-->
-<!--            display: flex;-->
-<!--            justify-content: space-between;-->
-<!--            align-items: center;-->
-<!--        }-->
-
-<!--        .welcome-text h1 {-->
-<!--            color: var(&#45;&#45;primary-color);-->
-<!--            margin-bottom: 0.5rem;-->
-<!--        }-->
-
-<!--        .welcome-text p {-->
-<!--            color: var(&#45;&#45;text-gray);-->
-<!--        }-->
-
-<!--        /* Course Grid */-->
-<!--        .course-grid {-->
-<!--            display: grid;-->
-<!--            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));-->
-<!--            gap: 2rem;-->
-<!--            padding: 1rem 0;-->
-<!--        }-->
-
-<!--        .course-card {-->
-<!--            background: var(&#45;&#45;card-background);-->
-<!--            border-radius: 10px;-->
-<!--            overflow: hidden;-->
-<!--            transition: transform 0.3s ease;-->
-<!--        }-->
-
-<!--        .course-card:hover {-->
-<!--            transform: translateY(-5px);-->
-<!--        }-->
-
-<!--        .course-image {-->
-<!--            width: 100%;-->
-<!--            height: 180px;-->
-<!--            object-fit: cover;-->
-<!--        }-->
-
-<!--        .course-content {-->
-<!--            padding: 1.5rem;-->
-<!--        }-->
-
-<!--        .course-title {-->
-<!--            font-size: 1.25rem;-->
-<!--            color: var(&#45;&#45;text-light);-->
-<!--            margin-bottom: 1rem;-->
-<!--        }-->
-
-<!--        .course-description {-->
-<!--            color: var(&#45;&#45;text-gray);-->
-<!--            font-size: 0.9rem;-->
-<!--            line-height: 1.5;-->
-<!--            margin-bottom: 1rem;-->
-<!--        }-->
-
-<!--        .course-button {-->
-<!--            display: inline-block;-->
-<!--            background-color: var(&#45;&#45;primary-color);-->
-<!--            color: var(&#45;&#45;text-light);-->
-<!--            padding: 0.75rem 1.5rem;-->
-<!--            border-radius: 5px;-->
-<!--            text-decoration: none;-->
-<!--            font-weight: 500;-->
-<!--            transition: background-color 0.3s;-->
-<!--        }-->
-
-<!--        .course-button:hover {-->
-<!--            background-color: #009999;-->
-<!--        }-->
-
-<!--        @media (max-width: 768px) {-->
-<!--            .container {-->
-<!--                padding: 1rem;-->
-<!--            }-->
-
-<!--            .welcome-section {-->
-<!--                flex-direction: column;-->
-<!--                text-align: center;-->
-<!--            }-->
-
-<!--            .course-grid {-->
-<!--                grid-template-columns: 1fr;-->
-<!--            }-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header>-->
-<!--    <a href="/dashboard" class="logo">-->
-<!--        <span>EduSpark</span>-->
-<!--    </a>-->
-<!--    <nav>-->
-<!--        <a href="/dashboard">Home</a>-->
-<!--        <a href="/courses/personal">My Courses</a>-->
-<!--        <a href="/profile" th:text="${userLogin}">Profile</a>-->
-<!--        <a href="/logout">Logout</a>-->
-<!--    </nav>-->
-<!--</header>-->
-
-<!--<div class="container">-->
-<!--    <div class="welcome-section">-->
-<!--        <div class="welcome-text">-->
-<!--            <h1>Welcome back, <span th:text="${userLogin}">User</span>!</h1>-->
-<!--            <p>Continue your learning journey</p>-->
-<!--        </div>-->
-<!--        <div class="user-role" th:text="${userRole}">Role</div>-->
-<!--    </div>-->
-
-<!--    <div class="course-grid">-->
-<!--        &lt;!&ndash; Debug information &ndash;&gt;-->
-<!--        <div th:if="${courses != null}" th:text="${'Total courses: ' + courses.size()}"></div>-->
-
-<!--        &lt;!&ndash; Add a check for empty courses list &ndash;&gt;-->
-<!--        <div th:if="${courses == null || courses.empty}" class="no-courses">-->
-<!--            <p>No courses available at the moment.</p>-->
-<!--            &lt;!&ndash; Debug information &ndash;&gt;-->
-<!--            <p th:if="${errorMessage}" th:text="${errorMessage}"></p>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Iterate over courses &ndash;&gt;-->
-<!--        <div th:if="${courses != null && !courses.empty}">-->
-<!--            <div th:each="course : ${courses}" class="course-card">-->
-<!--                <img th:src="${course.imageUrl}"-->
-<!--                     th:alt="${course.title} + ' Image'"-->
-<!--                     class="course-image"-->
-<!--                     onerror="this.src='/images/default-course.jpg'">-->
-<!--                <div class="course-content">-->
-<!--                    <h2 class="course-title" th:text="${course.title}">Course Title</h2>-->
-<!--                    <p class="course-description" th:text="${course.description}">Course description...</p>-->
-<!--                    <a th:href="@{'/courses/' + ${course.id}}" class="course-button">Continue Learning</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -216,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduSpark - My Learning Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
         :root {
             --primary-color: #00cccc;
@@ -255,10 +45,105 @@
             text-decoration: none;
         }
 
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            background: var(--card-background);
+            color: var(--text-light);
+        }
+          .notification-btn {
+            position: relative;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 1.1rem;
+        }
+
+        .notification-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary-color);
+            color: var(--text-light);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-background);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            min-width: 250px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .notification-dropdown.show {
+            display: block;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--background-dark);
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item:hover {
+            background: var(--background-dark);
+        }
+
+        /* Update nav styles to accommodate the notification button */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .search-container button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: var(--primary-color);
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         nav a {
             color: var(--text-light);
             text-decoration: none;
-            margin: 0 15px;
             padding: 5px 10px;
             border-radius: 5px;
             transition: all 0.3s ease;
@@ -268,7 +153,7 @@
             color: var(--primary-color);
         }
 
-        /* Main Content */
+        /* Container and Sections */
         .container {
             max-width: 1200px;
             margin: 2rem auto;
@@ -290,14 +175,26 @@
             margin-bottom: 0.5rem;
         }
 
-        .welcome-text p {
-            color: var(--text-gray);
+        .filters-section {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .filters-section select {
+            padding: 0.5rem;
+            background: var(--card-background);
+            color: var(--text-light);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         /* Course Grid */
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
             padding: 1rem 0;
         }
@@ -325,7 +222,6 @@
 
         .course-title {
             font-size: 1.25rem;
-            color: var(--text-light);
             margin-bottom: 1rem;
         }
 
@@ -351,9 +247,47 @@
             background-color: #009999;
         }
 
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            background: var(--text-gray);
+            cursor: not-allowed;
+        }
+
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+            color: var(--text-gray);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
+            header {
+                flex-direction: column;
+                gap: 1rem;
                 padding: 1rem;
+            }
+
+            .search-container {
+                margin: 1rem 0;
+                max-width: 100%;
             }
 
             .welcome-section {
@@ -361,8 +295,12 @@
                 text-align: center;
             }
 
-            .course-grid {
-                grid-template-columns: 1fr;
+            .filters-section {
+                flex-direction: column;
+            }
+
+            .filters-section select {
+                width: 100%;
             }
         }
     </style>
@@ -372,11 +310,29 @@
     <a href="/dashboard" class="logo">
         <span>EduSpark</span>
     </a>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search courses...">
+        <button id="searchBtn"><i class="fas fa-search"></i></button>
+    </div>
     <nav>
         <a href="/dashboard">Home</a>
         <a href="/courses/personal">My Courses</a>
+        <div style="position: relative;">
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-count">2</span>
+            </button>
+            <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-item">
+                    <p>New course "Advanced Java Programming" is now available!</p>
+                </div>
+                <div class="notification-item">
+                    <p>Your progress in "Python Programming Basics" is outstanding!</p>
+                </div>
+            </div>
+        </div>
         <a href="/profile" th:text="${userLogin}">Profile</a>
-        <a href="/logout">Logout</a>
+        <a href="/login">Logout</a>
     </nav>
 </header>
 
@@ -389,58 +345,233 @@
         <div class="user-role" th:text="${userRole}">Role</div>
     </div>
 
+    <div class="filters-section">
+        <select id="sortSelect">
+            <option value="">Sort by...</option>
+            <option value="title">Title</option>
+            <option value="date">Date</option>
+            <option value="popularity">Popularity</option>
+        </select>
+        <select id="filterSelect">
+            <option value="">Filter by...</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+        </select>
+    </div>
+
     <div class="course-grid">
-        <!-- Check if there are any courses available -->
-        <div th:if="${courses == null || courses.empty}">
-            <p>No courses available at the moment. Here are some recommendations:</p>
+        <!-- Course cards will be populated by JavaScript -->
+    </div>
 
-            <!-- Default course cards to display if courses are null or empty -->
-            <div class="course-card">
-                <img src="/images/default-course1.jpg" alt="Default Course 1" class="course-image">
-                <div class="course-content">
-                    <h2 class="course-title">Intro to Web Development</h2>
-                    <p class="course-description">Learn the basics of HTML, CSS, and JavaScript.</p>
-                    <a href="/courses/default1" class="course-button">Start Learning</a>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/images/default-course2.jpg" alt="Default Course 2" class="course-image">
-                <div class="course-content">
-                    <h2 class="course-title">Introduction to Python</h2>
-                    <p class="course-description">Get started with Python programming.</p>
-                    <a href="/courses/default2" class="course-button">Start Learning</a>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <img src="/images/default-course3.jpg" alt="Default Course 3" class="course-image">
-                <div class="course-content">
-                    <h2 class="course-title">Digital Marketing Basics</h2>
-                    <p class="course-description">Understand the fundamentals of digital marketing.</p>
-                    <a href="/courses/default3" class="course-button">Start Learning</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Actual courses section if courses are available -->
-        <div th:if="${courses != null && !courses.empty}">
-            <div th:each="course : ${courses}" class="course-card">
-                <img th:src="${course.imageUrl}"
-                     th:alt="${course.title} + ' Image'"
-                     class="course-image"
-                     onerror="this.src='/images/default-course.jpg'">
-                <div class="course-content">
-                    <h2 class="course-title" th:text="${course.title}">Course Title</h2>
-                    <p class="course-description" th:text="${course.description}">Course description...</p>
-                    <a th:href="@{'/courses/' + ${course.id}}" class="course-button">Continue Learning</a>
-                </div>
-            </div>
-        </div>
+    <div class="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <span id="currentPage">Page 1</span>
+        <button id="nextPage">Next</button>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // State management
+        let currentPage = 1;
+        const itemsPerPage = 6;
+        let currentSort = '';
+        let currentFilter = '';
+        let currentSearch = '';
+
+        // Sample data array to hold our course information
+        const coursesData = [
+            {
+                id: 1,
+                title: "Python Programming Basics",
+                description: "Learn the fundamentals of Python programming. Perfect for beginners starting their coding journey. Covers variables, control flow, functions, and more.",
+                imageUrl: "/css/images/py.png",
+                level: "beginner"
+            },
+            {
+                id: 2,
+                title: "Web Development Fundamentals",
+                description: "Master HTML, CSS, and JavaScript. Build responsive websites from scratch and understand modern web development practices.",
+                imageUrl: "/css/images/js.png",
+                level: "beginner"
+            },
+            {
+                id: 3,
+                title: "Introduction to Data Science",
+                description: "Explore data analysis, visualization, and basic machine learning concepts. Learn to work with pandas, numpy, and matplotlib.",
+                imageUrl: "/css/images/digital.jpg",
+                level: "intermediate"
+            },
+            {
+                id: 4,
+                title: "Advanced Java Programming",
+                description: "Deep dive into advanced Java concepts including multithreading, collections framework, and design patterns.",
+                imageUrl: "/css/images/js.png",
+                level: "advanced"
+            },
+            {
+                id: 5,
+                title: "Cloud Computing Essentials",
+                description: "Learn cloud computing fundamentals with AWS. Cover key services, architecture best practices, and deployment strategies.",
+                imageUrl: "/css/images/digital.jpg",
+                level: "intermediate"
+            },
+            {
+                id: 6,
+                title: "Mobile App Development",
+                description: "Build cross-platform mobile applications using React Native. Learn to create engaging mobile experiences.",
+                imageUrl: "/css/images/student.png",
+                level: "intermediate"
+            }
+        ];
+
+        // Function to filter and sort courses
+        function filterAndSortCourses() {
+            let filteredCourses = [...coursesData];
+
+            // Apply search filter
+            if (currentSearch) {
+                const searchTerm = currentSearch.toLowerCase();
+                filteredCourses = filteredCourses.filter(course =>
+                    course.title.toLowerCase().includes(searchTerm) ||
+                    course.description.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Apply level filter
+            if (currentFilter) {
+                filteredCourses = filteredCourses.filter(course =>
+                    course.level === currentFilter
+                );
+            }
+
+            // Apply sorting
+            if (currentSort) {
+                filteredCourses.sort((a, b) => {
+                    switch(currentSort) {
+                        case 'title':
+                            return a.title.localeCompare(b.title);
+                        case 'date':
+                            return b.id - a.id;
+                        case 'popularity':
+                            return Math.random() - 0.5;
+                        default:
+                            return 0;
+                    }
+                });
+            }
+
+            return filteredCourses;
+        }
+
+        // Function to update course grid with pagination
+        function updateCourseGrid() {
+            const filteredCourses = filterAndSortCourses();
+            const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const coursesForCurrentPage = filteredCourses.slice(startIndex, endIndex);
+
+            const grid = document.querySelector('.course-grid');
+            grid.innerHTML = '';
+
+            if (coursesForCurrentPage.length === 0) {
+                grid.innerHTML = '<p class="no-results">No courses found matching your criteria.</p>';
+                return;
+            }
+
+            coursesForCurrentPage.forEach(course => {
+                const card = createCourseCard(course);
+                grid.appendChild(card);
+            });
+
+            updatePagination(totalPages);
+        }
+
+        // Create course card element
+        function createCourseCard(course) {
+            const card = document.createElement('div');
+            card.className = 'course-card';
+            card.innerHTML = `
+                <img src="${course.imageUrl}"
+                     alt="${course.title}"
+                     class="course-image"
+                     onerror="this.src='/css/images/digital.jpg'">
+                <div class="course-content">
+                    <h2 class="course-title">${course.title}</h2>
+                    <p class="course-description">${course.description}</p>
+                    <a href="/courses/${course.id}" class="course-button">Continue Learning</a>
+                </div>
+            `;
+            return card;
+        }
+
+                   // Function to update pagination buttons
+            function updatePagination(totalPages) {
+                const prevButton = document.getElementById('prevPage');
+                const nextButton = document.getElementById('nextPage');
+                const currentPageDisplay = document.getElementById('currentPage');
+
+                currentPageDisplay.innerText = `Page ${currentPage}`;
+
+                prevButton.disabled = currentPage === 1;
+                nextButton.disabled = currentPage === totalPages;
+            }
+
+            // Event listeners for search and filter
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                currentSearch = document.getElementById('searchInput').value;
+                currentPage = 1; // Reset to first page
+                updateCourseGrid();
+            });
+
+            document.getElementById('sortSelect').addEventListener('change', function() {
+                currentSort = this.value;
+                currentPage = 1; // Reset to first page
+                updateCourseGrid();
+            });
+
+            document.getElementById('filterSelect').addEventListener('change', function() {
+                currentFilter = this.value;
+                currentPage = 1; // Reset to first page
+                updateCourseGrid();
+            });
+
+            // Pagination button event listeners
+            document.getElementById('prevPage').addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateCourseGrid();
+                }
+            });
+
+            document.getElementById('nextPage').addEventListener('click', function() {
+                const totalPages = Math.ceil(filterAndSortCourses().length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateCourseGrid();
+                }
+            });
+
+            // Initial population of course grid
+            updateCourseGrid();
+        });
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!notificationDropdown.contains(e.target) && e.target !== notificationBtn) {
+                notificationDropdown.classList.remove('show');
+            }
+        });
+</script>
 </body>
 </html>
-
-
-
